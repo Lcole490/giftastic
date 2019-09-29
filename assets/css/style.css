@@ -1,0 +1,25 @@
+
+
+.container{
+
+    margin-top: 50px;
+}
+
+
+.row{
+
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+button{
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    background: rgb(10, 112, 95);
+    font-family: 'Fugaz One', cursive;
+    color: white;
+    font-size: 20px;
+}

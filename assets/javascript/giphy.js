@@ -2,7 +2,7 @@
 
 var topics =["Michael Jordan", "Mike Tyson", "Usain Bolt", "Terrell Owens", "Derek Jeter", "Conner McGreggor", "Babe Ruth", "Rob Gronkowski", "Draymond Green", "Magic Johnson", "Chad Johnson", "Peyton Manning", "Brett Favre","Stephen Curry", "Dirk Nowitzki"];
 
-
+var limit = 10;
 
 
 
@@ -31,20 +31,100 @@ function renderButtons() {
       a.text(topics[i]);
       // Adding the button to the HTML
       $("#buttonspace").append(a);
+
+     
     }
   }
 
 
+  function displayTopicInfo() {
+
+    $("#topic-display").empty();
+      // Adding click event listen listener to all buttons
+      $("button").on("click", function() {
+        // Grabbing and storing the data-animal property value from the button
+    
+
+    var btntopic = $(this).attr("data-name");
+    console.log($(this).attr("data-name"));
+    console.log($(this).data("name"));
+    
+    var queryURL = "https://api.giphy.com/v1/gifs/search?&q=" + btntopic + "&limit="+ limit + "&api_key=1OtT6QlByI3EUxw1FIOLGVLe506YCGbo";
+
+    // Creating an AJAX call for the specific movie button being clicked
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    }).then(function(response) {
+
+        console.log(response);
+        for (var j=0; j<limit; j++){
+
+
+        
+
+      // Creating a div to hold the movie
+      var topicDiv = $("<div class='topic'>");
+
+      // Storing the rating data
+      var rating = response.data[j].rating;
+
+      // Creating an element to have the rating displayed
+      var pRating = $("<p>").text("Rating: " + rating);
+
+      // Displaying the rating
+      topicDiv.append(pRating);
+
+
+
+
+      // Retrieving the URL for the image
+      var imgURL = response.data[j].images.original_still.url;
+
+      // Creating an element to hold the image
+      var image = $("<img>").attr("src", imgURL);
+
+      // Appending the image
+      topicDiv.append(image);
+
+      // Putting the entire movie above the previous movies
+      $("#topic-display").append(topicDiv);
+
+
+}
+
+    });
+
+
+      });
+
+
+    
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
    // This function handles events where one button is clicked
-   $("#add-movie").on("click", function(event) {
+   $("#add-topic").on("click", function(event) {
     // event.preventDefault() prevents the form from trying to submit itself.
     // We're using a form so that the user can hit enter instead of clicking the button if they want
     event.preventDefault();
 
     // This line will grab the text from the input box
-    var movie = $("#movie-input").val().trim();
+    var topic = $("#topic-input").val().trim();
     // The movie from the textbox is then added to our array
-    movies.push(movie);
+    topics.push(topic);
 
     // calling renderButtons which handles the processing of our movie array
     renderButtons();
@@ -60,3 +140,5 @@ function renderButtons() {
 
 
   renderButtons();
+
+  displayTopicInfo();
