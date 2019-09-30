@@ -23,3 +23,11 @@ button{
     color: white;
     font-size: 20px;
 }
+
+
+#topic-display{
+
+    display: flex;
+    flex-flow: row wrap; /* OK elements, go as far as you can on one line, then wrap as you see fit */
+    margin-right:  auto;
+}

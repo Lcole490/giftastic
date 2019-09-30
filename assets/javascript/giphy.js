@@ -80,10 +80,12 @@ function renderButtons() {
 
 
       // Retrieving the URL for the image
-      var imgURL = response.data[j].images.original_still.url;
+      var imgURL = response.data[j].images.fixed_height_still.url;
 
       // Creating an element to hold the image
       var image = $("<img>").attr("src", imgURL);
+
+      image.addClass("gif");
 
       // Appending the image
       topicDiv.append(image);
@@ -140,6 +142,22 @@ $(document).on("click", ".topic", displayTopicInfo);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 
 
   renderButtons();
