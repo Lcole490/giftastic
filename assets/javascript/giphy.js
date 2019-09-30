@@ -39,11 +39,11 @@ function renderButtons() {
 
   function displayTopicInfo() {
 
-    $("#topic-display").empty();
+    
       // Adding click event listen listener to all buttons
       $("button").on("click", function() {
         // Grabbing and storing the data-animal property value from the button
-    
+        // $("#topic-display").empty();
 
     var btntopic = $(this).attr("data-name");
     console.log($(this).attr("data-name"));
@@ -56,6 +56,7 @@ function renderButtons() {
       url: queryURL,
       method: "GET"
     }).then(function(response) {
+        $("#topic-display").empty();
 
         console.log(response);
         for (var j=0; j<limit; j++){
@@ -126,14 +127,16 @@ function renderButtons() {
     // The movie from the textbox is then added to our array
     topics.push(topic);
 
+    console.log(topic);
+    console.log(topics);
+
     // calling renderButtons which handles the processing of our movie array
+      // Adding a click event listener to all elements with a class of "topic"
+$(document).on("click", ".topic", displayTopicInfo);
+// Calling the renderButtons function to display the intial buttons
+    
     renderButtons();
   });
-
-
-
-
-
 
 
 
