@@ -81,27 +81,53 @@ function renderButtons() {
 
       // Retrieving the URL for the image
       var imgURL = response.data[j].images.fixed_height_still.url;
+      var imgstill= response.data[j].images.fixed_height_still.url;
+      var imageanimate= response.data[j].images.fixed_height.url;
+
 
       // Creating an element to hold the image
       var image = $("<img>").attr("src", imgURL);
 
       image.addClass("gif");
+      image.attr("data-state", "still");
+      image.attr("data-still",imgstill);
+      image.attr("data-animate",imageanimate);
+
+
 
       // Appending the image
       topicDiv.append(image);
 
-      // Putting the entire movie above the previous movies
+      // Appending topic to previous topic
       $("#topic-display").append(topicDiv);
 
 
 }
 
+$(".gif").on("click", function() {
+    // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
+    var state = $(this).attr("data-state");
+    // If the clicked image's state is still, update its src attribute to what its data-animate value is.
+    // Then, set the image's data-state to animate
+    // Else set src to the data-still value
+    if (state === "still") {
+      $(this).attr("src", $(this).attr("data-animate"));
+      $(this).attr("data-state", "animate");
+    } else {
+      $(this).attr("src", $(this).attr("data-still"));
+      $(this).attr("data-state", "still");
+    }
+  });
+
+
     });
+
 
 
       });
 
 
+    
     
   }
 
